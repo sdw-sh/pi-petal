@@ -72,6 +72,13 @@ def destroy(controller):
     print('Did it work as expected?')
     print()
 
+# Initially written for the 74HC595N
+# capable of controlling 8 bit 
+# TODOS
+#   - add amount of bits as contructor param
+#   - add pin numbers as constructor param
+#   - DI?
+#   - _update register is tightly coupled with GPIO, change?
 class ShiftRegisterController:
     def __init__(self):
         self.state = 0x00000000
