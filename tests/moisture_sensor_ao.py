@@ -38,9 +38,9 @@ class HumidityController:
         humidity_value = (1 - digital_value / 255) * 100
         return HumidityMeasurement(humidity_value, humidity_value < self.humidity_thresholds[channel])
     
-    def destroy():
-        adc.close()
-        print("\nHumidity sensor ADC terminated regularly")
+    def destroy(self):
+        self.adc.close()
+        print("\n*** Humidity sensor ADC terminated regularly ***")
 
 
 
