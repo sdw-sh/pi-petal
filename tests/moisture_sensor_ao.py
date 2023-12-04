@@ -1,18 +1,7 @@
 import time
-import RPi.GPIO as GPIO
 from ADCDevice import *
 import sys
 from collections import namedtuple
-
-# Adding a soil moisture sensor and a relay to the board
-# closing the relay upon the moisture sensor falling dry
-# might control a pump in a later setup
-
-adc = ADCDevice()
-
-relay_pin = 16 # GPIO23
-
-percentage_cutoff = 75 # if percentage falls under zhis value the relais is closed
 
 HumidityMeasurement = namedtuple("HumidityMeasurement", ["humidity", "requires_watering"]) 
 
