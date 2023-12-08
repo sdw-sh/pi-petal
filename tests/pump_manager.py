@@ -15,7 +15,6 @@ class PumpManager:
         self.is_locked = False
         self.on_on_callback = on_on_callback
         self.on_off_callback = on_off_callback
-        # @see https://raspi.tv/2015/rpi-gpio-function-gpio-getmodev2
         if GPIO.getmode() != GPIO.BOARD:
             logger.critical("GPIO board mode not set, board not initiated, terminating")
             sys.exit(-1)

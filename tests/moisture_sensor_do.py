@@ -8,16 +8,18 @@ import time
 # working as expected
 # ao can be tested using freenove-kit/ADCLog.py
 
-#GPIO SETUP
+# GPIO SETUP
 sensorpin = 21
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(sensorpin, GPIO.IN)
+
 
 def checkmoinsture(sensorpin):
     if GPIO.input(sensorpin):
         print("no water detected")
     else:
         print("water detected")
+
 
 # detect pin goes HIGH or LOW
 GPIO.add_event_detect(sensorpin, GPIO.BOTH, bouncetime=300)
