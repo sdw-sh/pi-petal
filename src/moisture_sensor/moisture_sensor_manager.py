@@ -1,6 +1,5 @@
 from ADCDevice import *
 import sys
-from collections import namedtuple
 import logging
 
 logger = logging.getLogger(__name__)
@@ -25,7 +24,7 @@ class MoistureSensorManager:
             # TODO throw an error to allow for clean up of other ressources
             sys.exit(-1)
 
-    def check_humidity(self, channel) -> float:
+    def check_humidity(self, channel: int) -> float:
         """
         Check the humidity level for a specific channel (0 - 7).
 

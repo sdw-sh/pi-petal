@@ -42,14 +42,14 @@ class PumpManager:
 
     def off(self):
         GPIO.output(self.pump_pin, GPIO.LOW)
-        logger.info(f"Pump (pin {self.pump_pin}) stopped")
+        if callable(self.on_off_callback):
+            self.on_off_callback()
+        logger.info(f"Stopped pump (pin {self.pump_pin})")
 
     def lock(self):
         self.is_locked = True
-        if callable(self.on_off_callback):
-            self.on_off_callback()
+        logger.warning(f"LOCKED pump (pin {self.pump_pin})")
         self.off()
-        logger.warning(f"Pump (pin {self.pump_pin}) is locked")
 
     def destroy(self):
         logger.critical(f"PumpManager.destroy() called (pin {self.pump_pin})")
