@@ -2,6 +2,7 @@ import logging
 import sys
 import RPi.GPIO as GPIO
 
+# TODO define aliasses
 
 from watering_manager import WateringManager
 
@@ -16,7 +17,7 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S",
 )
 
-logging.info("🏵️ Welcome to PiPetal 🏵️")
+logging.info("🏵️ 🏵️ 🏵️   Welcome to PiPetal   🏵️ 🏵️ 🏵️")
 
 if __name__ == "__main__":
     print("Starting")
@@ -25,4 +26,11 @@ if __name__ == "__main__":
         manager = WateringManager()
         manager.main_loop()
     except KeyboardInterrupt:
+        # TODO release ressources upon any kind of shutdown
         logger.info("Have a nice day.")
+
+
+#       (\__  |
+#      :=)__)-|  __/)
+#       (/    |-(__(=:
+#             |   \)

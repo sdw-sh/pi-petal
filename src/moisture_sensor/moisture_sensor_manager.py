@@ -6,7 +6,6 @@ logger = logging.getLogger(__name__)
 
 
 # for 8 bit ADC
-# currently maps the channel index to tthe channel on the board, not ideal but acceptable
 class MoistureSensorManager:
     def __init__(self, adc):
         self.adc = adc
@@ -17,6 +16,7 @@ class MoistureSensorManager:
         adc_device = ADCDevice()
         if adc_device.detectI2C(0x4B):
             adc = ADS7830()
+            # TODO remove all print statement or replace with logging
             print("ADC found")
             return MoistureSensorManager(adc)
         else:
@@ -28,20 +28,22 @@ class MoistureSensorManager:
         """
         Check the humidity level for a specific channel (0 - 7).
 
-        This method reads the digital value from the ADC and converts it to a humidity percentage.
+        This method reads the digital value from the ADC and converts it
+        to a humidity arbitrary unit (AU),
+        technically the percentage of max possible current coming from the sensor).
 
         Args:
-            channel (int): The channel number to check the humidity for.
+            channel (int): The channel number to check the humidity for (0 - 7).
 
         Returns:
-            HumidityMeasurement: A namedtuple containing humidity percentage and a boolean indicating if watering is required.
+            float: The humidity level as a percentage in arbitrary units (AU).
         """
         # TODO average over a few measurements
         # TODO check for floating values and add a warning
         # TODO check for 0 values and add a warning
         digital_value = self.adc.analogRead(channel)
         humidity_value = round((1 - digital_value / 255) * 100, 1)
-        logger.info(f"humidity: {humidity_value}")
+        logger.info(f"humidity: {humidity_value} AU")
         return humidity_value
 
     def destroy(self):

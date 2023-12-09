@@ -27,7 +27,6 @@ class WateringManager:
             self.check()
             sleep_until_next_n_minutes_multiple(10)
 
-    # TODO better name -_-
     def check(self):
         soil_moisture = self.moisture_sensor.check_humidity(0)
         if soil_moisture < self.watering_threshold:
