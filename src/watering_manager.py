@@ -16,6 +16,7 @@ class WateringManager:
         self.watering_threshold = 40
         self.moisture_sensor = MoistureSensorManager.create_asd7830_based_controller()
         self.pump = PumpManager(pump_pin=12)
+        self.number_of_sensors = 5
 
         logging.info("WateringManager instantiated")
 
@@ -28,10 +29,20 @@ class WateringManager:
             sleep_until_next_n_minutes_multiple(10)
 
     def check(self):
-        soil_moisture = self.moisture_sensor.check_humidity(0)
-        if soil_moisture < self.watering_threshold:
-            self.water(soil_moisture)
+        soil_moisture_measurements = []
+        for sensor in range(self.number_of_sensors):
+            soil_moisture = self.moisture_sensor.check_humidity(sensor)
+            soil_moisture_measurements.append(soil_moisture)
+        if soil_moisture_measurements[0] < self.watering_threshold:
+            self.water(soil_moisture_measurements[0])
 
+    def _log_moisture_measurements(self, soil_moisture_measurements):
+        log_message = "Moisture: "
+        for index, value in enumerate(soil_moisture_measurements):
+            divider = "" if index == 0 else "|"
+            log_message = f"{log_message} {divider} {index}: {value}"
+        logger.info(log_message)
+    
     def water(self, initial_soil_moisture):
         logger.info(
             f"Plant moisture of {initial_soil_moisture} is below {self.watering_threshold}, watering now."
