@@ -16,8 +16,7 @@ class MoistureSensorManager:
         adc_device = ADCDevice()
         if adc_device.detectI2C(0x4B):
             adc = ADS7830()
-            # TODO remove all print statement or replace with logging
-            print("ADC found")
+            logger.info("ADC found")
             return MoistureSensorManager(adc)
         else:
             logger.critical("ADC not found, critical error, terminating")
