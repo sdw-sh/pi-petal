@@ -5,9 +5,17 @@ logger = logging.getLogger(__name__)
 
 class Plant:
     def __init__(
-        self, plant_name, watering_threshold=50, plant_id=None, water_plant=True
+        self,
+        plant_name,
+        sensor_number,
+        valve_number=None,
+        watering_threshold=50,
+        plant_id=None,
+        water_plant=True,
     ):
-        self.plant_name
+        self.plant_name = plant_name
+        self.sensor_number = sensor_number
+        self.valve_number = valve_number if valve_number else sensor_number
         self.plant_id = plant_id if plant_id else plant_name
         self.watering_threshold = watering_threshold
         self.water_plant = water_plant
