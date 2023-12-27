@@ -23,7 +23,7 @@ logging.info("Log started")
 
 def moisture_sensor_demo(sensor):
     while True:
-        sensor.check_humidity(0)
+        sensor.check_moisture(0)
         sleep_until_next_n_minutes_multiple(2)
 
 

@@ -45,7 +45,7 @@ class WateringManager:
 
     def check(self, plant: Plant) -> None:
         soil_moisture_measurements = []
-        soil_moisture = self.moisture_sensor.check_humidity(plant.sensor_number)
+        soil_moisture = self.moisture_sensor.check_moisture(plant.sensor_number)
         if soil_moisture < self.watering_threshold and plant.water_plant:
             self.water(plant, soil_moisture)
 
@@ -70,7 +70,7 @@ class WateringManager:
         # wait for a short while to let the water settle
         time.sleep(15)
         # check if some water reached the sensor
-        watered_soil_moisture = self.moisture_sensor.check_humidity(0)
+        watered_soil_moisture = self.moisture_sensor.check_moisture(0)
         if (
             watered_soil_moisture - initial_soil_moisture
             < self.min_moisture_increase_on_watering
