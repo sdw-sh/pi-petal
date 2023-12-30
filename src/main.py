@@ -5,6 +5,7 @@ import RPi.GPIO as GPIO
 # TODO define aliasses
 
 from watering_manager import WateringManager
+from board_setup import initialize_board
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -22,11 +23,12 @@ logging.info("🏵️ 🏵️ 🏵️   Welcome to PiPetal   🏵️ 🏵️ �
 if __name__ == "__main__":
     print("Starting")
     try:
-        GPIO.setmode(GPIO.BOARD)
+        initialize_board()
         manager = WateringManager()
         manager.main_loop()
     except KeyboardInterrupt:
         # TODO release ressources upon any kind of shutdown
+        GPIO.cleanup()
         logger.info("Have a nice day.")
 
 

@@ -1,6 +1,6 @@
 import time
 import logging
-import argparse
+import RPi.GPIO as GPIO
 
 
 from plant import Plant
@@ -45,7 +45,8 @@ class WateringManager:
                 plant_id="Test Plant 3",
             ),
         ]
-
+        # the panic LED
+        GPIO.setup(40, GPIO.OUT, initial=GPIO.LOW)
         logging.info("WateringManager instantiated")
 
     # this allows nothing but the WateringManager running
@@ -104,5 +105,7 @@ class WateringManager:
             self.panic()
 
     def panic(self):
+        # makeshift warning LED
+        GPIO.output(40, GPIO.HIGH)
         logger.error("WateringManager panicked!")
         self.pump.lock()
