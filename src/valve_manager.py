@@ -9,6 +9,8 @@ logger = logging.getLogger(__name__)
 # TODO add state of the app service to get locking everywhere
 # should also include the shutdown
 
+# This is basically just LOW and HIGH switcher, ponder adding an abstraction level, 
+# where the names of the LOW and HIGH methods may be given freely
 
 class ValveManager:
     def __init__(

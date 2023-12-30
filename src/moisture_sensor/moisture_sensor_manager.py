@@ -43,7 +43,7 @@ class MoistureSensorManager:
         number_of_measurements = 5
         for x in range(number_of_measurements):
             digital_value = self.adc.analogRead(channel)
-            if warnings and (digital_value < 5 or digital_value > 249):
+            if warnings and (digital_value < 5 or digital_value > 250):
                 # TODO which value is actually coming here?
                 logger.warning(
                     f"Moisture measurement for sensor channel {channel} gave a digital value of {digital_value}. This extreme value may be due to a disconnected or otherwise non functional sensor. Please check."
@@ -52,8 +52,9 @@ class MoistureSensorManager:
             time.sleep(0.1)
         digital_average = sum(digital_values) / number_of_measurements
         moisture_value = round((1 - digital_average / 255) * 100, 1)
+        # TODO add standard deviation for display and check of failure in the sensor
         if logging:
-            logger.info(f"sensor {channel} moisture: {moisture_value} AU")
+            logger.info(f"sensor {channel} moisture: {moisture_value} AU, deviation: ")
         return moisture_value
 
     def destroy(self):

@@ -9,6 +9,8 @@ from pump.pump_manager import PumpManager
 from moisture_sensor.sleep_until_next_n_minutes_multiple import (
     sleep_until_next_n_minutes_multiple,
 )
+from valve_manager import ValveManager
+
 
 logger = logging.getLogger(__name__)
 
@@ -16,37 +18,53 @@ logger = logging.getLogger(__name__)
 class WateringManager:
     def __init__(self):
         self.min_moisture_increase_on_watering = 3
-        self.watering_threshold = 40
         self.moisture_sensor = MoistureSensorManager.create_asd7830_based_controller()
-        self.pump = PumpManager(pump_pin=12)
-        # Todo add plant collection that cheks for ids
+        self.pump = PumpManager(pump_pin=33)
+        self.valves = ValveManager({0: 35, 1: 37})
+        # Todo add plant collection that checks for ids
         self.plants = [
-            Plant("Palm Tree", 0),
-            Plant("Test Plant", 1, water_plant=False),
+            Plant("Palm Tree", 0, watering_threshold=100),
+            Plant("Test Plant", 1, watering_threshold=100),
             Plant(
                 "Test Plant",
                 2,
+                plant_id="Test Plant 1",
+                water_plant=False,
+            ),
+            Plant(
+                "Test Plant",
+                3,
                 valve_number=5,
                 plant_id="Test Plant 2",
                 water_plant=False,
-                watering_threshold=150,
+            ),
+            Plant(
+                "Test Plant",
+                4,
+                valve_number=5,
+                plant_id="Test Plant 3",
             ),
         ]
 
         logging.info("WateringManager instantiated")
 
     # this allows nothing but the WateringManager running
-    # might be a good idea to move one level up
+    # TODO might be a good idea to move one level up
     # for now it is fine
     def main_loop(self):
         while True:
-            self.check(self.plants[0])
+            for plant in self.plants:
+                self.check(plant)
             sleep_until_next_n_minutes_multiple(10)
 
     def check(self, plant: Plant) -> None:
-        soil_moisture_measurements = []
         soil_moisture = self.moisture_sensor.check_moisture(plant.sensor_number)
-        if soil_moisture < self.watering_threshold and plant.water_plant:
+        print(111)
+        print(soil_moisture)
+        print(plant.watering_threshold)
+        print(soil_moisture < plant.watering_threshold)
+        if soil_moisture < plant.watering_threshold and plant.water_plant:
+            print(222)
             self.water(plant, soil_moisture)
 
     def _log_moisture_measurements(self, soil_moisture_measurements):
@@ -66,7 +84,9 @@ class WateringManager:
         if plant.water_plant == False:
             logger.warning(f"Tried to water {Plant} which is set to non watering!")
             return
+        self.valves.open(plant.valve_number)
         self.pump.pump(seconds=3)
+        self.valves.close(plant.valve_number)
         # wait for a short while to let the water settle
         time.sleep(15)
         # check if some water reached the sensor
