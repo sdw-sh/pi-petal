@@ -15,23 +15,22 @@ logging.basicConfig(
 )
 
 
-
 if __name__ == "__main__":
     GPIO.setmode(GPIO.BOARD)
     pumpManager = PumpManager(pump_pin=12)
     try:
-        pumpManager.on(seconds=3)
+        pumpManager.pump(seconds=3)
         pumpManager.destroy()
         time.sleep(1)
-        pumpManager.on(seconds=3.3)
+        pumpManager.pump(seconds=3.3)
         time.sleep(1)
-        pumpManager.on(seconds=7)
-        pumpManager.on(seconds=7.9876)
+        pumpManager.pump(seconds=7)
+        pumpManager.pump(seconds=7.9876)
         time.sleep(1)
-        pumpManager.on(seconds=7, force=True)
+        pumpManager.pump(seconds=7, force=True)
         time.sleep(1)
         pumpManager.lock()
-        pumpManager.on(2)
+        pumpManager.pump(2)
         time.sleep(1)
         pumpManager.destroy()
     except KeyboardInterrupt:

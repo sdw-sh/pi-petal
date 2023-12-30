@@ -66,7 +66,7 @@ class WateringManager:
         if plant.water_plant == False:
             logger.warning(f"Tried to water {Plant} which is set to non watering!")
             return
-        self.pump.on(seconds=3)
+        self.pump.pump(seconds=3)
         # wait for a short while to let the water settle
         time.sleep(15)
         # check if some water reached the sensor

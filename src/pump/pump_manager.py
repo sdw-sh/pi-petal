@@ -21,7 +21,7 @@ class PumpManager:
         GPIO.setup(self.pump_pin, GPIO.OUT, initial=GPIO.LOW)
         logger.info(f"Instantiated  PumpManager (pin {self.pump_pin})")
 
-    def on(self, seconds: float = 0, force: bool = False):
+    def pump(self, seconds: float = 0, force: bool = False):
         if self.is_locked:
             logger.warning(
                 f"PumpManager.on called on locked pump (pin {self.pump_pin})"
