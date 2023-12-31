@@ -16,14 +16,20 @@ logger = logging.getLogger(__name__)
 
 
 class WateringManager:
-    def __init__(self):
+    def __init__(
+        self,
+        panic_led_pin=40,  # GPIO21
+        system_running_led_pin=38,  # GPIO20
+    ):
         self.min_moisture_increase_on_watering = 3
+        self.panic_led_pin = panic_led_pin
+        self.system_running_led_pin = system_running_led_pin
         self.moisture_sensor = MoistureSensorManager.create_asd7830_based_controller()
         self.pump = PumpManager(pump_pin=33)
         self.valves = ValveManager({0: 35, 1: 37})
         # Todo add plant collection that checks for ids
         self.plants = [
-            Plant("Palm Tree", 0, watering_threshold=100),
+            Plant("Palm Tree", 0, watering_threshold=100, water_plant=False),
             Plant("Test Plant", 1, watering_threshold=100),
             Plant(
                 "Test Plant",
@@ -45,8 +51,9 @@ class WateringManager:
                 plant_id="Test Plant 3",
             ),
         ]
-        # the panic LED
-        GPIO.setup(40, GPIO.OUT, initial=GPIO.LOW)
+
+        GPIO.setup(self.panic_led_pin, GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup(self.system_running_led_pin, GPIO.OUT, initial=GPIO.HIGH)
         logging.info("WateringManager instantiated")
 
     # this allows nothing but the WateringManager running
@@ -60,12 +67,7 @@ class WateringManager:
 
     def check(self, plant: Plant) -> None:
         soil_moisture = self.moisture_sensor.check_moisture(plant.sensor_number)
-        print(111)
-        print(soil_moisture)
-        print(plant.watering_threshold)
-        print(soil_moisture < plant.watering_threshold)
         if soil_moisture < plant.watering_threshold and plant.water_plant:
-            print(222)
             self.water(plant, soil_moisture)
 
     def _log_moisture_measurements(self, soil_moisture_measurements):

@@ -23,7 +23,7 @@ if __name__ == "__main__":
                 )
                 measured_values.append(f"{value:>4}")
             logger.info(" | ".join(measured_values))
-            time.sleep(300)
+            time.sleep(60 * 30)
     except KeyboardInterrupt:
         # TODO release ressources upon any kind of shutdown
         logger.info("\nDid it work as expected?\n")
