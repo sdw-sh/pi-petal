@@ -36,5 +36,5 @@ class ButtonManager:
                 button_definition["pin"],
                 GPIO.FALLING,
                 callback=button_definition["callback"],
-                bouncetime=150,
+                bouncetime=200,
             )

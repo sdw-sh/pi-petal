@@ -2,7 +2,7 @@ import time
 import logging
 import RPi.GPIO as GPIO
 
-
+from button_manager import ButtonManager
 from plant import Plant
 from moisture_sensor.moisture_sensor_manager import MoistureSensorManager
 from pump.pump_manager import PumpManager
@@ -51,6 +51,8 @@ class WateringManager:
                 plant_id="Test Plant 3",
             ),
         ]
+
+        self.button_manager = None
 
         GPIO.setup(self.panic_led_pin, GPIO.OUT, initial=GPIO.LOW)
         GPIO.setup(self.system_running_led_pin, GPIO.OUT, initial=GPIO.HIGH)

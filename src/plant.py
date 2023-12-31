@@ -31,5 +31,11 @@ class Plant:
             logger.warn(f"Invalid watering_threshold value {new_value} set for {self}.")
         self._watering_threshold = new_value
 
+    def change_watering_threshold(self, change):
+        new_value = self.watering_threshold + change
+        if new_value > 100 or new_value < 0:
+            return
+        self.watering_threshold = new_value
+
     def __str__(self):
         return f"Plant(plant_name={self.plant_name}, plant_id={self.plant_id}, watering_threshold={self._watering_threshold})"
