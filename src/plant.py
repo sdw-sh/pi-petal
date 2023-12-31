@@ -37,5 +37,8 @@ class Plant:
             return
         self.watering_threshold = new_value
 
-    def __str__(self):
+    def get_plant_string(self):
         return f"Plant(plant_name={self.plant_name}, plant_id={self.plant_id}, watering_threshold={self._watering_threshold})"
+
+    def __str__(self):
+        return self.get_plant_string()
