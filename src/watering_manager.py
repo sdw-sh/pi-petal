@@ -15,6 +15,8 @@ from valve_manager import ValveManager
 logger = logging.getLogger(__name__)
 
 
+# TODO this class combines valves and pump
+# this should be done by a watering process class or something similar
 class WateringManager:
     def __init__(
         self,
@@ -70,7 +72,10 @@ class WateringManager:
     def check(self, plant: Plant) -> None:
         soil_moisture = self.moisture_sensor.check_moisture(plant.sensor_number)
         if soil_moisture < plant.watering_threshold and plant.water_plant:
-            self.water(plant, soil_moisture)
+            logger.info(
+                f"Plant moisture of {soil_moisture} is below threshold for {plant}, watering now."
+            )
+            self.water_and_check(plant, soil_moisture)
 
     def _log_moisture_measurements(self, soil_moisture_measurements):
         log_message = "Moisture: "
@@ -79,19 +84,14 @@ class WateringManager:
             log_message = f"{log_message} {divider} {index}: {value}"
         logger.info(log_message)
 
-    def water(self, plant: Plant, initial_soil_moisture: int) -> None:
-        logger.info(
-            f"Plant moisture of {initial_soil_moisture} is below threshold for {plant}, watering now."
-        )
+    def water_and_check(self, plant: Plant, initial_soil_moisture: int) -> None:
         if self.pump.is_locked:
             logger.warning("Tried to water but the pump is locked!")
             return
         if plant.water_plant == False:
             logger.warning(f"Tried to water {Plant} which is set to non watering!")
             return
-        self.valves.open(plant.valve_number)
-        self.pump.pump(seconds=3)
-        self.valves.close(plant.valve_number)
+        self.water(plant.valve_number, time_in_s=3)
         # wait for a short while to let the water settle
         time.sleep(15)
         # check if some water reached the sensor
@@ -107,6 +107,12 @@ class WateringManager:
                 "Moisture level did not increase after watering. Check pump, hose etc.!"
             )
             self.panic()
+
+    # TODO this belongs in a separate class
+    def water(self, valve_number, time_in_s):
+        self.valves.open(valve_number)
+        self.pump.pump(time_in_s)
+        self.valves.close(valve_number)
 
     def panic(self):
         # makeshift warning LED

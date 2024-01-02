@@ -32,6 +32,7 @@ class ButtonManager:
                 GPIO.IN,
                 pull_up_down=GPIO.PUD_UP,
             )
+        for button_definition in buttons:
             GPIO.add_event_detect(
                 button_definition["pin"],
                 GPIO.FALLING,
