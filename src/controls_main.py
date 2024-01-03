@@ -79,31 +79,15 @@ if __name__ == "__main__":
     def water_valve(valve, seconds):
         valves.open(valve)
         pump.start()
-
-        def stop():
-            pump.stop()
-            valves.close(valve)
-
-        timer = threading.Timer(seconds, stop)
-        timer.start()
-        # print(f"seconds: {seconds}")
-        # time.sleep(seconds)
-        # pump.pump(seconds)
-        # valves.close(valve)
-
-    def water_valve_t(valve, seconds):
-        valves.open(valve)
-        pump.start()
         time.sleep(seconds)
         pump.stop()
         valves.close(valve)
 
     def eventCatcher(event):
         threading.Thread(
-            target=water_valve_t,
+            target=water_valve,
             args=(event["valve"], event["seconds"]),
         ).start()
-        # water_valve(event["valve"], event["seconds"])
 
     dispatcher.connect(eventCatcher, "MyKey")
 
@@ -122,15 +106,21 @@ if __name__ == "__main__":
         )
     )
 
-    #    control_elements.append(
-    #        ControlElement(
-    #            name="",
-    #            button_1=lambda *_: water_valve(valve=1, seconds=0.5),
-    #            button_2=lambda *_: water_valve(valve=1, seconds=1),
-    #            display=lambda *_: "Water valve 1",
-    #        )
-    #    )
-
+    control_elements.append(
+        ControlElement(
+            name="",
+            button_1=lambda *_: dispatcher.send(
+                "MyKey",
+                event={"valve": 1, "seconds": 3},
+            ),
+            button_2=lambda *_: dispatcher.send(
+                "MyKey",
+                event={"valve": 1, "seconds": 1},
+            ),
+            display=lambda *_: "Water valve 1",
+        )
+    )
+    
     def map_plant_moisture_to_control(plant: Plant) -> ControlElement:
         return ControlElement(
             name=plant.plant_name,
