@@ -154,4 +154,7 @@ if __name__ == "__main__":
             },
         ]
     )
+    # TODO add sigterm handling
+    # signal.signal(signal.SIGINT, self.exit_gracefully)
+    # signal.signal(signal.SIGTERM, self.exit_gracefully)
     signal.pause()
