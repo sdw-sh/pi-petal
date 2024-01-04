@@ -17,6 +17,8 @@ class ControlState:
         self.output()
 
     def change_active_selection(self, *_):
+        print("CHANGE SELECTION")
+        print(_)
         self.active_control += 1
         if self.active_control > len(self.controls) - 1:
             self.active_control = 0

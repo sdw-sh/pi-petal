@@ -130,6 +130,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+# Keep the example file though
+!.env.example
 
 # Spyder project settings
 .spyderproject

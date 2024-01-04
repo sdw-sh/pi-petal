@@ -32,11 +32,13 @@ class ButtonManager:
                 GPIO.IN,
                 pull_up_down=GPIO.PUD_UP,
             )
+            print(button_definition["pin"])
+            print(button_definition["callback"])
             GPIO.add_event_detect(
                 button_definition["pin"],
                 GPIO.FALLING,
-                callback=lambda *_: threading.Thread(
-                    target=button_definition["callback"],
+                callback=lambda *_, bd=button_definition: threading.Thread(
+                    target=bd["callback"],
                 ).start(),
                 bouncetime=200,
             )

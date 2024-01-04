@@ -97,7 +97,7 @@ if __name__ == "__main__":
     control_elements.append(
         ControlElement(
             name="",
-            button_1=lambda *_: irrigationUnit.water(0, 1),
+            button_1=lambda *_: irrigationUnit.water(1, 3),
             # dispatcher.send(
             #    "WaterPlant",
             #    event={"valve": 1, "seconds": 3},
@@ -107,6 +107,15 @@ if __name__ == "__main__":
                 event={"valve": 1, "seconds": 1},
             ),
             display=lambda *_: "Water valve 1",
+        )
+    )
+
+    control_elements.append(
+        ControlElement(
+            name="",
+            button_1=lambda *_: print("123"),
+            button_2=lambda *_: print("456"),
+            display=lambda *_: "Have a nice day",
         )
     )
 
