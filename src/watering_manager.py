@@ -5,11 +5,11 @@ import RPi.GPIO as GPIO
 from button_manager import ButtonManager
 from plant import Plant
 from moisture_sensor.moisture_sensor_manager import MoistureSensorManager
-from pump.pump_manager import PumpManager
+from irrigation.pump_manager import PumpManager
 from moisture_sensor.sleep_until_next_n_minutes_multiple import (
     sleep_until_next_n_minutes_multiple,
 )
-from valve_manager import ValveManager
+from irrigation.valve_manager import ValveManager
 
 
 logger = logging.getLogger(__name__)

@@ -1,8 +1,12 @@
 import logging
 import time
 
+from dotenv import load_dotenv
+
 from moisture_sensor.moisture_sensor_manager import MoistureSensorManager
 from logging_definition import log_setup
+
+load_dotenv()
 
 log_setup("sensors.log")
 logger = logging.getLogger(__name__)

@@ -4,8 +4,8 @@ import RPi.GPIO as GPIO
 
 
 from logging_definition import log_setup
-from pump.pump_manager import PumpManager
-from valve_manager import ValveManager
+from irrigation.pump_manager import PumpManager
+from irrigation.valve_manager import ValveManager
 
 log_setup(f"valve_and_pump.log")
 logger = logging.getLogger(__name__)
