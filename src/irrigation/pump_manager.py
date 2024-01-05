@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 class PumpManager:
-    critical_time_span_in_s = 4
+    critical_time_span_in_s = 11
 
     def __init__(self, pump_pin: int, on_on_callback=None, on_off_callback=None):
         self.pump_pin = pump_pin

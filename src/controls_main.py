@@ -84,7 +84,7 @@ if __name__ == "__main__":
             name="",
             button_1=lambda *_: dispatcher.send(
                 "WaterPlant",
-                event={"valve": 0, "seconds": 3},
+                event={"valve": 0, "seconds": 10},
             ),
             button_2=lambda *_: dispatcher.send(
                 "WaterPlant",

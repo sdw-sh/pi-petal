@@ -8,7 +8,7 @@ class IrrigationUnit:
         self.pump = pump_manager
         self.valves = valve_manager
         self.last_watering_event = None
-        self.watering_interval = datetime.timedelta(milliseconds=50)
+        self.watering_interval = datetime.timedelta(milliseconds=500)
 
     def _water(self, valve, time_in_s):
         threading.Thread(
