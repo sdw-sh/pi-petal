@@ -70,7 +70,7 @@ class WateringManager:
             sleep_until_next_n_minutes_multiple(10)
 
     def check(self, plant: Plant) -> None:
-        soil_moisture = self.moisture_sensor.check_single_sensor(plant.sensor_number)
+        soil_moisture = self.moisture_sensor.check_single_sensor(plant.sensor)
         if soil_moisture < plant.watering_threshold and plant.water_plant:
             logger.info(
                 f"Plant moisture of {soil_moisture} is below threshold for {plant}, watering now."

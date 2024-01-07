@@ -1,4 +1,7 @@
 from typing import List
+
+from utilities.functions import find
+
 from plant_register.plant import Plant
 from moisture_sensor.moisture_measurement_result import MoistureMeasurementResult
 
@@ -27,19 +30,15 @@ plants = [
 ]
 
 
-def find(list, condition):
-    for element in list:
-        if condition(element):
-            return element
-    return None
-
-
 class PlantRegister:
     def __init__(self, plants=plants) -> None:
-        self.plants = plants
+        self.plants: List[Plant] = plants
 
-    def request_moisture_measurements(self):
-        pass
+    def get_sensors(self) -> List[int]:
+        sensors = []
+        for plant in self.plants:
+            sensors.append(plant.sensor)
+        return sensors
 
     def update_moisture_values(
         self, measurement_results: List[MoistureMeasurementResult]

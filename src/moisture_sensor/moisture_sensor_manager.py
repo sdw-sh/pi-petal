@@ -7,7 +7,7 @@ from datetime import datetime
 
 from ADCDevice import *
 
-from moisture_sensor import MoistureMeasurementResult
+from moisture_sensor.moisture_measurement_result import MoistureMeasurementResult
 
 
 logger = logging.getLogger(__name__)

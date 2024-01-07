@@ -1,7 +1,7 @@
 import time
 import sys
 import logging
-from moisture_sensor_manager import MoistureSensorManager
+from moisture_sensor.moisture_sensor_manager import MoistureSensorManager
 from sleep_until_next_n_minutes_multiple import sleep_until_next_n_minutes_multiple
 
 logger = logging.getLogger(__name__)

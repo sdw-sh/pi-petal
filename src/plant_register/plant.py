@@ -14,7 +14,7 @@ class Plant:
         water_plant=True,
     ):
         self.plant_name = plant_name
-        self.sensor_number = sensor_number
+        self.sensor = sensor_number
         self.valve_number = valve_number if valve_number else sensor_number
         self.plant_id = plant_id if plant_id else plant_name
         # TODO rename all watering to irrigation
