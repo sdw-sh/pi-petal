@@ -17,14 +17,14 @@ plants = [
     Plant(
         "Wasserpflanze",
         3,
-        valve_number=5,
+        valve=5,
         plant_id="Test Plant 2",
         water_plant=False,
     ),
     Plant(
         "Geldbaum",
         4,
-        valve_number=5,
+        valve=5,
         plant_id="Test Plant 3",
     ),
 ]
@@ -41,16 +41,27 @@ class PlantRegister:
         return sensors
 
     def update_moisture_values(
-        self, measurement_results: List[MoistureMeasurementResult]
+        self,
+        measurement_results: List[MoistureMeasurementResult],
     ):
+        print("measurement_results")
+        print(measurement_results)
         for result in measurement_results:
+            print("result")
+            print(result)
             plant: Plant = find(
                 self.plants,
-                lambda plant: plant.sensor_number == result.sensor,
+                lambda plant: plant.sensor == result.sensor,
             )
             if plant is not None:
                 plant.moisture_level = result.moisture_measurement
                 plant.last_moisture_measurement = result.datetime
+
+    def get_short_moisture_value_strings(self):
+        string = ""
+        for plant in self.plants:
+            string += f"{plant.sensor}:{plant.moisture_level}|"
+        return string
 
     def request_irrigation(self):
         pass

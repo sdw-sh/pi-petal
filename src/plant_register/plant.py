@@ -7,15 +7,15 @@ class Plant:
     def __init__(
         self,
         plant_name,
-        sensor_number,
-        valve_number=None,
+        sensor,
+        valve=None,
         watering_threshold=50,
         plant_id=None,
         water_plant=True,
     ):
         self.plant_name = plant_name
-        self.sensor = sensor_number
-        self.valve_number = valve_number if valve_number else sensor_number
+        self.sensor = sensor
+        self.valve = valve if valve else sensor
         self.plant_id = plant_id if plant_id else plant_name
         # TODO rename all watering to irrigation
         self.watering_threshold = watering_threshold

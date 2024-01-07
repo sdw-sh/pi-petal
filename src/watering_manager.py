@@ -42,14 +42,14 @@ class WateringManager:
             Plant(
                 "Test Plant",
                 3,
-                valve_number=5,
+                valve=5,
                 plant_id="Test Plant 2",
                 water_plant=False,
             ),
             Plant(
                 "Test Plant",
                 4,
-                valve_number=5,
+                valve=5,
                 plant_id="Test Plant 3",
             ),
         ]
@@ -91,7 +91,7 @@ class WateringManager:
         if plant.water_plant == False:
             logger.warning(f"Tried to water {Plant} which is set to non watering!")
             return
-        self.water(plant.valve_number, time_in_s=3)
+        self.water(plant.valve, time_in_s=3)
         # wait for a short while to let the water settle
         time.sleep(15)
         # check if some water reached the sensor
@@ -109,10 +109,10 @@ class WateringManager:
             self.panic()
 
     # TODO this belongs in a separate class
-    def water(self, valve_number, time_in_s):
-        self.valves.open(valve_number)
+    def water(self, valve, time_in_s):
+        self.valves.open(valve)
         self.pump.pump(time_in_s)
-        self.valves.close(valve_number)
+        self.valves.close(valve)
 
     def panic(self):
         # makeshift warning LED

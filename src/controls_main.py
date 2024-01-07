@@ -35,14 +35,14 @@ plants = [
     Plant(
         "Wasserpflanze",
         3,
-        valve_number=5,
+        valve=5,
         plant_id="Test Plant 2",
         water_plant=False,
     ),
     Plant(
         "Geldbaum",
         4,
-        valve_number=5,
+        valve=5,
         plant_id="Test Plant 3",
     ),
 ]

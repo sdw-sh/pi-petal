@@ -18,7 +18,7 @@ class MoistureSensorConnector:
     def measure_moisture(self, event):
         print("event@measure_moisture")
         print(event)
-        results = (self.moisture_sensor.check_sensors(event),)
+        results = self.moisture_sensor.check_sensors(event)
         dispatcher.send(
             signal=EventSignal.MOISTURE_MEASUREMENT_RESULTS,
             sender=self,
