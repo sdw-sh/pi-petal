@@ -1,7 +1,14 @@
-from ADCDevice import *
 import sys
 import logging
 import time
+
+from typing import List
+from datetime import datetime
+
+from ADCDevice import *
+
+from moisture_sensor import MoistureMeasurementResult
+
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +31,7 @@ class MoistureSensorManager:
             # TODO throw an error to allow for clean up of other ressources
             sys.exit(-1)
 
-    def check_moisture(self, channel: int, warnings=True, logging=True) -> float:
+    def check_single_sensor(self, channel: int, warnings=True, logging=True) -> float:
         """
         Check the moisture level for a specific channel (0 - 7).
 
@@ -56,6 +63,16 @@ class MoistureSensorManager:
         if logging:
             logger.info(f"sensor {channel} moisture: {moisture_value} AU, deviation: ")
         return moisture_value
+
+    def check_sensors(self, sensors: List[int]) -> List[MoistureMeasurementResult]:
+        results = []
+        for sensor in sensors:
+            measurement_value = self.check_single_sensor(sensor)
+            result = MoistureMeasurementResult(
+                sensor, measurement_value, datetime.now()
+            )
+            results.append(result)
+        return results
 
     def destroy(self):
         """Clean up resources and close connections to the ADC device."""

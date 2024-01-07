@@ -3,7 +3,7 @@ import logging
 import RPi.GPIO as GPIO
 
 from button_manager import ButtonManager
-from plant import Plant
+from plant_register.plant import Plant
 from moisture_sensor.moisture_sensor_manager import MoistureSensorManager
 from irrigation.pump_manager import PumpManager
 from moisture_sensor.sleep_until_next_n_minutes_multiple import (
@@ -70,7 +70,7 @@ class WateringManager:
             sleep_until_next_n_minutes_multiple(10)
 
     def check(self, plant: Plant) -> None:
-        soil_moisture = self.moisture_sensor.check_moisture(plant.sensor_number)
+        soil_moisture = self.moisture_sensor.check_single_sensor(plant.sensor_number)
         if soil_moisture < plant.watering_threshold and plant.water_plant:
             logger.info(
                 f"Plant moisture of {soil_moisture} is below threshold for {plant}, watering now."
@@ -95,7 +95,7 @@ class WateringManager:
         # wait for a short while to let the water settle
         time.sleep(15)
         # check if some water reached the sensor
-        watered_soil_moisture = self.moisture_sensor.check_moisture(0)
+        watered_soil_moisture = self.moisture_sensor.check_single_sensor(0)
         if (
             watered_soil_moisture - initial_soil_moisture
             < self.min_moisture_increase_on_watering

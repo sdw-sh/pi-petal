@@ -17,8 +17,11 @@ class Plant:
         self.sensor_number = sensor_number
         self.valve_number = valve_number if valve_number else sensor_number
         self.plant_id = plant_id if plant_id else plant_name
+        # TODO rename all watering to irrigation
         self.watering_threshold = watering_threshold
         self.water_plant = water_plant
+        self.moisture_level = None
+        self.last_moisture_measurement = None
         logger.info(f"Instantiated class {self}.")
 
     @property

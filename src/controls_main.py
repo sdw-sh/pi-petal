@@ -10,7 +10,7 @@ from logging_definition import log_setup
 from board_setup import initialize_board
 from button_manager import ButtonManager
 from control_state import ControlState, ControlElement
-from plant import Plant
+from plant_register.plant import Plant
 from irrigation.pump_manager import PumpManager
 from irrigation.valve_manager import ValveManager
 from irrigation.create_irrigation_unit import create_irrigation_unit
