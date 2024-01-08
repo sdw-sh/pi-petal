@@ -1,6 +1,9 @@
 import threading
 import datetime
 import time
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class IrrigationUnit:
@@ -25,7 +28,7 @@ class IrrigationUnit:
 
     def water(self, valve, time_in_s):
         if not self.can_water():
-            print("CANCELLED!")
+            logger.warn("Irrigation cancelled, irrigation unit in refractory phase!")
             return
         self.valves.open(valve)
         self.pump.start()

@@ -32,8 +32,6 @@ class ButtonManager:
                 GPIO.IN,
                 pull_up_down=GPIO.PUD_UP,
             )
-            print(button_definition["pin"])
-            print(button_definition["callback"])
             GPIO.add_event_detect(
                 button_definition["pin"],
                 GPIO.FALLING,

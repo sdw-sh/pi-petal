@@ -1,5 +1,10 @@
+import logging
+
 from external_scripts.PCF8574 import PCF8574_GPIO
 from external_scripts.Adafruit_LCD1602 import Adafruit_CharLCD
+
+
+logger = logging.getLogger(__name__)
 
 
 class DisplayManager:
@@ -13,7 +18,7 @@ class DisplayManager:
             try:
                 self.mcp = PCF8574_GPIO(PCF8574A_address)
             except:
-                print("I2C Address Error !")
+                logger.critical("I2C Address Error !")
                 exit(1)
         # Create LCD, passing in MCP GPIO adapter.
         self.lcd = Adafruit_CharLCD(

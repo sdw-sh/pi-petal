@@ -44,11 +44,7 @@ class PlantRegister:
         self,
         measurement_results: List[MoistureMeasurementResult],
     ):
-        print("measurement_results")
-        print(measurement_results)
         for result in measurement_results:
-            print("result")
-            print(result)
             plant: Plant = find(
                 self.plants,
                 lambda plant: plant.sensor == result.sensor,

@@ -110,15 +110,6 @@ if __name__ == "__main__":
         )
     )
 
-    control_elements.append(
-        ControlElement(
-            name="",
-            button_1=lambda *_: print("123"),
-            button_2=lambda *_: print("456"),
-            display=lambda *_: "Have a nice day",
-        )
-    )
-
     def map_plant_moisture_to_control(plant: Plant) -> ControlElement:
         return ControlElement(
             name=plant.plant_name,

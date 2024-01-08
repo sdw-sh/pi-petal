@@ -11,8 +11,6 @@ from dotenv import load_dotenv
 
 def create_pump_manager():
     pin = int(os.getenv("PUMP_PIN"))
-    print("pin")
-    print(pin)
     return PumpManager(pin)
 
 

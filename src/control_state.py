@@ -17,15 +17,13 @@ class ControlState:
         self.output()
 
     def change_active_selection(self, *_):
-        print("CHANGE SELECTION")
-        print(_)
         self.active_control += 1
         if self.active_control > len(self.controls) - 1:
             self.active_control = 0
         self.output()
 
     def output(self):
-        # TODO add output manager object for print(), display etc.
+        # TODO add output manager object for print, display etc.
         # os.system("clear")
         control = self.controls[self.active_control]
         logging.info(control.display())

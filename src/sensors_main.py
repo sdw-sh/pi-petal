@@ -29,7 +29,7 @@ def initialize_display():
         try:
             mcp = PCF8574_GPIO(PCF8574A_address)
         except:
-            print("I2C Address Error !")
+            logger.critical("I2C Address Error !")
             exit(1)
     # Create LCD, passing in MCP GPIO adapter.
     lcd = Adafruit_CharLCD(pin_rs=0, pin_e=2, pins_db=[4, 5, 6, 7], GPIO=mcp)

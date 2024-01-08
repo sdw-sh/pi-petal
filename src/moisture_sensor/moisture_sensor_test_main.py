@@ -28,7 +28,6 @@ def moisture_sensor_demo(sensor):
 
 
 if __name__ == "__main__":
-    print("Starting")
     try:
         sensor = MoistureSensorManager.create_asd7830_based_controller()
         moisture_sensor_demo(sensor)

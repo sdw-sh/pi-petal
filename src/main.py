@@ -21,7 +21,6 @@ logging.basicConfig(
 logging.info("🏵️ 🏵️ 🏵️   Welcome to PiPetal   🏵️ 🏵️ 🏵️")
 
 if __name__ == "__main__":
-    print("Starting")
     try:
         initialize_board()
         manager = WateringManager()
