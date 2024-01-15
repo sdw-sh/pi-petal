@@ -1,3 +1,5 @@
+# Rename to SignalRegistry
+
 # Ponder putting signal and event creator together
 # FOO = ("FOO_SIGNAL", Foo) # where Foo is the event creator class definition (not an instance)
 # may use an named tuple with signal and event
