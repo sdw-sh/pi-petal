@@ -6,13 +6,8 @@ from typing import List
 
 logger = logging.getLogger(__name__)
 
-# TODO add state of the app service to get locking everywhere
-# should also include the shutdown
 
-# This is basically just LOW and HIGH switcher, ponder adding an abstraction level,
-# where the names of the LOW and HIGH methods may be given freely
-
-
+# This is basically a LOW and HIGH switcher
 class ValveManager:
     def __init__(
         self,
@@ -24,7 +19,7 @@ class ValveManager:
             sys.exit(-1)
         for value in valves:
             GPIO.setup(value, GPIO.OUT, initial=GPIO.LOW)
-        logger.info(f"Instantiated  ValveManager (List: {valves})")
+        logger.info(f"Instantiated ValveManager (valve pins: {valves})")
 
     def open(self, valve_index):
         GPIO.output(self.valves[valve_index], GPIO.HIGH)

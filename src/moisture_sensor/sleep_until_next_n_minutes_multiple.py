@@ -5,7 +5,7 @@ import datetime
 def sleep_until_next_n_minutes_multiple(n):
     """
     Sleeps until the next n minute multiple from the full hour.
-    Best suited for time spans with 60 % n = 0 like 1, 2, 3, 5, 10, 15, 20, 30, 60
+    Best suited for time spans with 60 % n = 0 i.e. 1, 2, 3, 5, 10, 15, 20, 30, 60
     """
     now = datetime.datetime.now()
 
