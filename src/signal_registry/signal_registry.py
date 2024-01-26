@@ -11,7 +11,7 @@ from signal_registry.events import (
 
 class SignalRegistry:
     CHECK_PLANTS = Register("check_plants", None)
-    REQUEST_MOISTURE = Register(
+    REQUEST_MOISTURE_MEASUREMENTS = Register(
         "REQUEST_MOISTURE_MEASUREMENTS", RequestMoistureMeasurementEvent
     )
     MOISTURE_MEASUREMENT_RESULTS = Register(

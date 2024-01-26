@@ -1,6 +1,6 @@
 from pydispatch import dispatcher
 
-from event_signal import EventSignal
+from signal_registry.signal_registry import SignalRegistry
 from plant_register.plant_register import PlantRegister
 
 
@@ -9,17 +9,17 @@ class PlantRegisterConnector:
         self.plant_register = plant_register
         dispatcher.connect(
             self.request_moisture_measurements,
-            EventSignal.CHECK_PLANTS,
+            SignalRegistry.CHECK_PLANTS.signal,
         )
         dispatcher.connect(
             self.update_moisture_values,
-            EventSignal.MOISTURE_MEASUREMENT_RESULTS,
+            SignalRegistry.MOISTURE_MEASUREMENT_RESULTS.signal,
         )
 
     def request_moisture_measurements(self):
         sensors = self.plant_register.get_sensors()
         dispatcher.send(
-            signal=EventSignal.REQUEST_MOISTURE_MEASUREMENTS,
+            signal=SignalRegistry.REQUEST_MOISTURE_MEASUREMENTS.signal,
             sender=self,
             event=sensors,
         )
@@ -28,9 +28,9 @@ class PlantRegisterConnector:
         self.plant_register.update_moisture_values(event)
         message = self.plant_register.get_short_moisture_value_strings()
         dispatcher.send(
-            signal=EventSignal.UPDATE_DISPLAY,
+            signal=SignalRegistry.UPDATE_DISPLAY.signal,
             sender=self,
-            event=(message, ""),
+            event=SignalRegistry.UPDATE_DISPLAY.event(message, ""),
         )
 
 

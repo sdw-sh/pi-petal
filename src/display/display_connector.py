@@ -1,6 +1,6 @@
 from pydispatch import dispatcher
 
-from event_signal import EventSignal
+from signal_registry.signal_registry import SignalRegistry
 from display.display_manager import DisplayManager
 
 
@@ -9,9 +9,8 @@ class DisplayConnector:
         self.display = display
         dispatcher.connect(
             self.update,
-            EventSignal.UPDATE_DISPLAY,
+            SignalRegistry.UPDATE_DISPLAY.signal,
         )
-        self.display.update("xyz")
 
     def update(self, event):
         self.display.update(event[0], event[1])

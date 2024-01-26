@@ -2,7 +2,7 @@ import threading
 
 from pydispatch import dispatcher
 
-from event_signal import EventSignal
+from signal_registry.signal_registry import SignalRegistry
 from external_scripts.repeat_timer import RepeatTimer
 
 
@@ -21,7 +21,7 @@ class Scheduler:
 
     def request_moisture_measurement(self):
         dispatcher.send(
-            signal=EventSignal.CHECK_PLANTS,
+            signal=SignalRegistry.CHECK_PLANTS.signal,
             sender=self,
-            event=None,
+            # event=,
         )

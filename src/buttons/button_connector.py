@@ -3,7 +3,6 @@ import os
 from pydispatch import dispatcher
 
 from signal_registry.signal_registry import SignalRegistry
-from event_signal import EventSignal
 from buttons.button_manager import ButtonManager
 from buttons.buttons import Buttons
 

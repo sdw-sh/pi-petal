@@ -1,6 +1,7 @@
 from pydispatch import dispatcher
 
-from event_signal import EventSignal
+
+from signal_registry.signal_registry import SignalRegistry
 from moisture_sensor.moisture_sensor_manager import MoistureSensorManager
 
 
@@ -12,13 +13,13 @@ class MoistureSensorConnector:
         self.moisture_sensor = moisture_sensor
         dispatcher.connect(
             self.measure_moisture,
-            signal=EventSignal.REQUEST_MOISTURE_MEASUREMENTS,
+            signal=SignalRegistry.REQUEST_MOISTURE_MEASUREMENTS.signal,
         )
 
     def measure_moisture(self, event):
         results = self.moisture_sensor.check_sensors(event)
         dispatcher.send(
-            signal=EventSignal.MOISTURE_MEASUREMENT_RESULTS,
+            signal=SignalRegistry.MOISTURE_MEASUREMENT_RESULTS.signal,
             sender=self,
-            event=results,
+            event=SignalRegistry.MOISTURE_MEASUREMENT_RESULTS.event(results),
         )
