@@ -38,6 +38,6 @@ if __name__ == "__main__":
     moisture_sensor = create_moisture_sensor_connector()
     display = create_display_connector()
     buttons = create_button_connector()
-    scheduler.start()
+    scheduler.start(run_immidiately=True)
 
     signal.pause()

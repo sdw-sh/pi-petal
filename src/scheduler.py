@@ -23,5 +23,5 @@ class Scheduler:
         dispatcher.send(
             signal=SignalRegistry.CHECK_PLANTS.signal,
             sender=self,
-            # event=,
+            event=SignalRegistry.CHECK_PLANTS.event(),
         )

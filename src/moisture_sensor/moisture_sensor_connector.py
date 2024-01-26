@@ -1,4 +1,5 @@
 from pydispatch import dispatcher
+from signal_registry.events import RequestMoistureMeasurementEvent
 
 
 from signal_registry.signal_registry import SignalRegistry
@@ -16,8 +17,8 @@ class MoistureSensorConnector:
             signal=SignalRegistry.REQUEST_MOISTURE_MEASUREMENTS.signal,
         )
 
-    def measure_moisture(self, event):
-        results = self.moisture_sensor.check_sensors(event)
+    def measure_moisture(self, event: RequestMoistureMeasurementEvent):
+        results = self.moisture_sensor.check_sensors(event.sensors)
         dispatcher.send(
             signal=SignalRegistry.MOISTURE_MEASUREMENT_RESULTS.signal,
             sender=self,
