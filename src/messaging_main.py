@@ -12,6 +12,7 @@ from plant_register.plant_register_connector import create_plant_register_connec
 from moisture_sensor.create_moisture_sensor_connector import (
     create_moisture_sensor_connector,
 )
+from buttons.button_connector import create_button_connector
 
 load_dotenv()
 
@@ -33,9 +34,10 @@ if __name__ == "__main__":
     dispatcher.connect(eventCatcher)
 
     scheduler = Scheduler()
-    plant_register_connector = create_plant_register_connector()
-    moisture_sensor_connector = create_moisture_sensor_connector()
-    display_connector = create_display_connector()
+    plant_register = create_plant_register_connector()
+    moisture_sensor = create_moisture_sensor_connector()
+    display = create_display_connector()
+    buttons = create_button_connector()
     scheduler.start()
 
     signal.pause()

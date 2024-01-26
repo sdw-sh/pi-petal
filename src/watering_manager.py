@@ -2,7 +2,7 @@ import time
 import logging
 import RPi.GPIO as GPIO
 
-from button_manager import ButtonManager
+from buttons.button_manager import ButtonManager
 from plant_register.plant import Plant
 from moisture_sensor.moisture_sensor_manager import MoistureSensorManager
 from irrigation.pump_manager import PumpManager

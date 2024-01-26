@@ -4,7 +4,6 @@ from irrigation.pump_manager import PumpManager
 from irrigation.valve_manager import ValveManager
 from irrigation.irrigation_unit import IrrigationUnit
 
-from dotenv import load_dotenv
 
 # load_dotenv()
 

@@ -28,3 +28,11 @@ class UpdateDisplayEvent:
     def __init__(self, line_1: str, line_2: str) -> None:
         self.line_1 = line_1
         self.line_2 = line_2
+
+
+class ButtonEvent:
+    def __init__(self, button: str) -> None:
+        self.button = button
+
+    def __str__(self):
+        return f"<ButtonEvent for {self.button}>"

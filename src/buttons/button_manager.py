@@ -5,21 +5,6 @@ import threading
 
 logger = logging.getLogger(__name__)
 
-example = [
-    {
-        "pin": 12,  # 12,16,18
-        "callback": lambda _: logger.info("pin 12"),
-    },
-    {
-        "pin": 16,  # 12,16,18
-        "callback": lambda _: logger.info("pin 16"),
-    },
-    {
-        "pin": 18,  # 12,16,18
-        "callback": lambda _: logger.info("pin 18"),
-    },
-]
-
 
 class ButtonManager:
     def __init__(self, buttons) -> None:

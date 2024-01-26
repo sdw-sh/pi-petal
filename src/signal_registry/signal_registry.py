@@ -5,6 +5,7 @@ from signal_registry.events import (
     IrrigateEvent,
     PanicEvent,
     UpdateDisplayEvent,
+    ButtonEvent,
 )
 
 
@@ -20,3 +21,4 @@ class SignalRegistry:
     IRRIGATE = Register("IRRIGATE", IrrigateEvent)
     PANIC = Register("PANIC", PanicEvent)
     CALM = Register("CALM", None)
+    BUTTON = Register("BUTTON", ButtonEvent)

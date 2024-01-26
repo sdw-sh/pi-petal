@@ -3,20 +3,21 @@ import threading
 from pydispatch import dispatcher
 
 from event_signal import EventSignal
+from external_scripts.repeat_timer import RepeatTimer
 
 
 class Scheduler:
     def __init__(self) -> None:
-        # how often the moisture of the plants should be measured
-        self.moisture_measurement_interval = 60 * 5 # min
+        self.moisture_measurement_interval = 100  # 60 * 5
 
-    # TODO exchange with RepeatTimer from https://stackoverflow.com/a/48741004 
-    def start(self):
-        self.request_moisture_measurement()
-        threading.Timer(
+    def start(self, run_immidiately=False):
+        if run_immidiately:
+            self.request_moisture_measurement()
+        timer = RepeatTimer(
             self.moisture_measurement_interval,
             self.request_moisture_measurement,
-        ).start()
+        )
+        timer.start()
 
     def request_moisture_measurement(self):
         dispatcher.send(

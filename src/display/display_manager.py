@@ -1,4 +1,5 @@
 import logging
+import datetime
 
 from external_scripts.PCF8574 import PCF8574_GPIO
 from external_scripts.Adafruit_LCD1602 import Adafruit_CharLCD
@@ -39,6 +40,9 @@ class DisplayManager:
         line1="",
         line2="",
     ):
+        if line2 == "":
+            now = datetime.datetime.now()
+            line2 = str(now.time())
         self.lcd.setCursor(0, 0)
         self.lcd.message(line1 + "\n")
         self.lcd.message(line2)
