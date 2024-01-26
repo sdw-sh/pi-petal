@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from logging_definition import log_setup
 from board_setup import initialize_board
 from buttons.button_manager import ButtonManager
-from control_state import ControlState, ControlElement
+from control_state.control_state import ControlState, ControlElement
 from plant_register.plant import Plant
 from irrigation.pump_manager import PumpManager
 from irrigation.valve_manager import ValveManager

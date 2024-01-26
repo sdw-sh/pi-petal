@@ -24,20 +24,14 @@ if __name__ == "__main__":
     initialize_board()
 
     def eventCatcher(event, *args, **kwargs):
-        logger.debug("event")
-        logger.debug(event)
-        logger.debug("args")
-        logger.debug(args)
-        logger.debug("kwargs")
-        logger.debug(kwargs)
-
-    dispatcher.connect(eventCatcher)
+        logger.debug(f"SIGNAL: {kwargs['signal']} | EVENT: {event}")
 
     scheduler = Scheduler()
     plant_register = create_plant_register_connector()
     moisture_sensor = create_moisture_sensor_connector()
     display = create_display_connector()
     buttons = create_button_connector()
+    dispatcher.connect(eventCatcher)
     scheduler.start(run_immidiately=True)
 
     signal.pause()

@@ -8,7 +8,7 @@ from external_scripts.repeat_timer import RepeatTimer
 
 class Scheduler:
     def __init__(self) -> None:
-        self.moisture_measurement_interval = 100  # 60 * 5
+        self.moisture_measurement_interval = 10 * 60  # 60 * 5
 
     def start(self, run_immidiately=False):
         if run_immidiately:

@@ -1,17 +1,13 @@
 import logging
 import os
 
+from typing import List
 
-class ControlElement:
-    def __init__(self, name, display, button_1, button_2) -> None:
-        self.name = name
-        self.display = display
-        self.button_1 = button_1
-        self.button_2 = button_2
+from control_state.control_element import ControlElement
 
 
 class ControlState:
-    def __init__(self, controls) -> None:
+    def __init__(self, controls: List[ControlElement]) -> None:
         self.active_control = 0
         self.controls = controls
         self.output()
