@@ -24,7 +24,7 @@ if __name__ == "__main__":
     initialize_board()
 
     def eventCatcher(event, *args, **kwargs):
-        logger.debug(f"SIGNAL: {kwargs['signal']} | EVENT: {event}")
+        logger.debug(f"SIGNAL: \"{kwargs['signal']}\" | EVENT: {event}")
 
     scheduler = Scheduler()
     plant_register = create_plant_register_connector()

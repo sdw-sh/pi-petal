@@ -74,6 +74,17 @@ class MoistureSensorManager:
             results.append(result)
         return results
 
+    # TODO add return type, how do I annotate the generator here
+    def check_sensors_generator(
+        self, sensors: List[int]
+    ):  # -> MoistureMeasurementResult:
+        for sensor in sensors:
+            measurement_value = self.check_single_sensor(sensor)
+            result = MoistureMeasurementResult(
+                sensor, measurement_value, datetime.now()
+            )
+            yield result
+
     def destroy(self):
         """Clean up resources and close connections to the ADC device."""
         self.adc.close()

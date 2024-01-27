@@ -8,9 +8,17 @@ class RequestMoistureMeasurementEvent:
         self.sensors = sensors
 
 
-class MoistureMeasurementResultEvent:
+class MoistureMeasurementsResultEvent:
     def __init__(self, results: List[MoistureMeasurementResult]) -> None:
         self.sensors = results
+
+
+class MoistureMeasurementResultEvent:
+    def __init__(self, result: MoistureMeasurementResult) -> None:
+        self.result = result
+
+    def __str__(self):
+        return f"<{self.__class__.__name__} for result: {self.result}>"
 
 
 class IrrigateEvent:
@@ -29,10 +37,13 @@ class UpdateDisplayEvent:
         self.line_1 = line_1
         self.line_2 = line_2
 
+    def __str__(self):
+        return f'<{self.__class__.__name__} for "{self.line_1}" "{self.line_2}">'
+
 
 class ButtonEvent:
     def __init__(self, button: str) -> None:
         self.button = button
 
     def __str__(self):
-        return f"<ButtonEvent for {self.button}>"
+        return f"<{self.__class__.__name__} for {self.button}>"

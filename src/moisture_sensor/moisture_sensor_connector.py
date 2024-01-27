@@ -18,7 +18,14 @@ class MoistureSensorConnector:
         )
 
     def measure_moisture(self, event: RequestMoistureMeasurementEvent):
-        results = self.moisture_sensor.check_sensors(event.sensors)
+        results = self.moisture_sensor.check_sensors_generator(event.sensors)
+        for result in results:
+            dispatcher.send(
+                signal=SignalRegistry.MOISTURE_MEASUREMENT_RESULT.signal,
+                sender=self,
+                event=SignalRegistry.MOISTURE_MEASUREMENT_RESULT.event(result),
+            )
+        return
         dispatcher.send(
             signal=SignalRegistry.MOISTURE_MEASUREMENT_RESULTS.signal,
             sender=self,
