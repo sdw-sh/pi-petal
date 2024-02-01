@@ -53,8 +53,8 @@ plants = [
 def map_plant_moisture_to_control(plant: Plant) -> ControlElement:
     return ControlElement(
         name=plant.plant_name,
-        button_1=lambda *_: plant.change_watering_threshold(+2),
-        button_2=lambda *_: plant.change_watering_threshold(-2),
+        button_1=lambda *_: plant.change_irrigation_threshold(+2),
+        button_2=lambda *_: plant.change_irrigation_threshold(-2),
         display=lambda *_: plant.get_plant_string(),
     )
 
@@ -62,8 +62,8 @@ def map_plant_moisture_to_control(plant: Plant) -> ControlElement:
 def map_plant_Watering_to_control(plant: Plant) -> ControlElement:
     return ControlElement(
         name="",
-        button_1=lambda *_: plant.change_watering_threshold(+2),
-        button_2=lambda *_: plant.change_watering_threshold(-2),
+        button_1=lambda *_: plant.change_irrigation_threshold(+2),
+        button_2=lambda *_: plant.change_irrigation_threshold(-2),
         display=lambda *_: plant.get_plant_string(),
     )
 
@@ -113,16 +113,16 @@ if __name__ == "__main__":
     def map_plant_moisture_to_control(plant: Plant) -> ControlElement:
         return ControlElement(
             name=plant.plant_name,
-            button_1=lambda *_: plant.change_watering_threshold(+2),
-            button_2=lambda *_: plant.change_watering_threshold(-2),
+            button_1=lambda *_: plant.change_irrigation_threshold(+2),
+            button_2=lambda *_: plant.change_irrigation_threshold(-2),
             display=lambda *_: plant.get_plant_string(),
         )
 
     def map_plant_Watering_to_control(plant: Plant) -> ControlElement:
         return ControlElement(
             name="",
-            button_1=lambda *_: plant.change_watering_threshold(+2),
-            button_2=lambda *_: plant.change_watering_threshold(-2),
+            button_1=lambda *_: plant.change_irrigation_threshold(+2),
+            button_2=lambda *_: plant.change_irrigation_threshold(-2),
             display=lambda *_: plant.get_plant_string(),
         )
 

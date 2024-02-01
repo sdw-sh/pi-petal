@@ -71,7 +71,7 @@ class WateringManager:
 
     def check(self, plant: Plant) -> None:
         soil_moisture = self.moisture_sensor.check_single_sensor(plant.sensor)
-        if soil_moisture < plant.watering_threshold and plant.water_plant:
+        if soil_moisture < plant.irrigation_threshold and plant.irrigate_plant:
             logger.info(
                 f"Plant moisture of {soil_moisture} is below threshold for {plant}, watering now."
             )
@@ -88,7 +88,7 @@ class WateringManager:
         if self.pump.is_locked:
             logger.warning("Tried to water but the pump is locked!")
             return
-        if plant.water_plant == False:
+        if plant.irrigate_plant == False:
             logger.warning(f"Tried to water {Plant} which is set to non watering!")
             return
         self.water(plant.valve, time_in_s=3)
