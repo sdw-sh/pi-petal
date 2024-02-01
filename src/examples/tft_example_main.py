@@ -25,7 +25,6 @@ disp.begin()
 width = disp.width
 height = disp.height
 
-
 if 0:
     image = Image.open("deployrainbows.gif")
     frame = 0
@@ -37,7 +36,6 @@ if 0:
             time.sleep(0.05)
         except EOFError:
             frame = 0
-
 
 img = Image.new("RGB", (width, height))
 draw = ImageDraw.Draw(img)
@@ -53,7 +51,6 @@ draw = ImageDraw.Draw(img)
 
 line_height = 18
 
-
 # Draw a white X.
 draw.line(
     (0, line_height, width, line_height),
@@ -68,29 +65,27 @@ draw.line(
 #    fill=(0, 255, 255),
 # )
 
-
-font_montserrat = ImageFont.truetype("fonts/Montserrat-Bold.ttf", 14)
-font_b612_b = ImageFont.truetype("fonts/B612-Bold.ttf", 14)
-font_b612_r = ImageFont.truetype("fonts/B612-Regular.ttf", 14)
-
+font_montserrat = ImageFont.truetype("../assets/fonts/Montserrat-Bold.ttf", 14)
+font_b612_bold = ImageFont.truetype("../assets/fonts/B612-Bold.ttf", 14)
+font_b612_regular = ImageFont.truetype("../assets/fonts/B612-Regular.ttf", 14)
 
 # Write some text
 draw.text(
     (2, 0),
     "Hello World! 123456789012345678901234567890",
-    font=font_montserrat,
+    font=font_b612_bold,
     fill=(0, 255, 0),
 )
 draw.text(
     (2, line_height),
     "Hello World! 123456789012345678901234567890",
-    font=font_b612_r,
+    font=font_b612_regular,
     fill=(0, 255, 0),
 )
 draw.text(
     (2, line_height * 2),
     "Hello World! 123456789012345678901234567890",
-    font=font_b612_b,
+    font=font_b612_bold,
     fill=(0, 255, 0),
 )
 draw.text(
@@ -114,7 +109,7 @@ draw.text(
 draw.text(
     (2, line_height * 6),
     "öäüßáà",
-    font=font_b612_r,
+    font=font_b612_regular,
     fill=(255, 255, 255),
 )
 # display!
@@ -122,7 +117,7 @@ disp.display(img)
 
 i = 0
 
-while True:
+while False:
     i += 1
     draw.rectangle(
         (0, 0, disp.width, disp.height),
@@ -132,7 +127,7 @@ while True:
     draw.text(
         (2, line_height * 6),
         str(i),
-        font=font_b612_r,
+        font=font_b612_regular,
         fill=(255, 255, 255),
     )
     disp.display(img)

@@ -8,7 +8,7 @@ from external_scripts.Adafruit_LCD1602 import Adafruit_CharLCD
 logger = logging.getLogger(__name__)
 
 
-class DisplayManager:
+class LcdDisplayManager:
     def __init__(self) -> None:
         PCF8574_address = 0x27  # I2C address of the PCF8574 chip.
         PCF8574A_address = 0x3F  # I2C address of the PCF8574A chip.

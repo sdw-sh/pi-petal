@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from logging_definition import log_setup
 from board_setup import initialize_board
 from scheduler import Scheduler
-from display.display_connector import create_display_connector
+from display.lcd_display_connector import create_display_connector
 from plant_register.plant_register_connector import create_plant_register_connector
 from moisture_sensor.create_moisture_sensor_connector import (
     create_moisture_sensor_connector,

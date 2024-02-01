@@ -2,11 +2,11 @@ from pydispatch import dispatcher
 from signal_registry.events import UpdateDisplayEvent
 
 from signal_registry.signal_registry import SignalRegistry
-from display.display_manager import DisplayManager
+from display.lcd_display_manager import LcdDisplayManager
 
 
-class DisplayConnector:
-    def __init__(self, display: DisplayManager) -> None:
+class LcdDisplayConnector:
+    def __init__(self, display: LcdDisplayManager) -> None:
         self.display = display
         dispatcher.connect(
             self.update,
@@ -18,6 +18,6 @@ class DisplayConnector:
 
 
 def create_display_connector():
-    manager = DisplayManager()
-    connector = DisplayConnector(manager)
+    manager = LcdDisplayManager()
+    connector = LcdDisplayConnector(manager)
     return connector
