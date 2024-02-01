@@ -6,11 +6,12 @@ display = TftDisplayManager()
 display.update(
     "Small Palm Tree",
     [
-        "threshold: 46",
-        "measured: 52.6",
-        "measurement time",
+        "Threshold: 46",
+        "Measured: 52.6",
+        "Measurement Time:",
         "15:10 05.03.2024",
-        "last irrigation",
+        "Last Irrigation:",
         "05:21 03.03.2024",
+        "Sensor / Valve: 3",
     ],
 )
