@@ -26,13 +26,6 @@ class IrrigationUnitConnector:
             event=event,
         )
 
-    def _irrigate(*args, **kwargs):
-        print("args ############################")
-        print(args)
-
-        print("kwargs++++++++++++++++++++++++++++++")
-        print(kwargs)
-
 
 def create_irrigation_unit_connector():
     unit = create_irrigation_unit()

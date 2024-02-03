@@ -23,12 +23,15 @@ class ValveManager:
             GPIO.setup(value, GPIO.OUT, initial=GPIO.LOW)
         logger.info(f"Instantiated ValveManager (valve pins: {valves})")
 
-    def open(self, valve_index):
+    def open(self, valve_index) -> bool:
+        if not index_exists(self.valves, valve_index):
+            logger.warn(f"Non existent index {valve_index} requested in ValveManager.")
+            logger.warn(f"Existing indices are {self.valves}")
+            return False
         GPIO.output(self.valves[valve_index], GPIO.HIGH)
+        return True
 
     def close(self, valve_index):
-        logger.warn(f"Non existent index {valve_index} requested in ValveManager.")
-        logger.warn(f"Existing indices are {self.valves}")
         if not index_exists(self.valves, valve_index):
             return
         GPIO.output(self.valves[valve_index], GPIO.LOW)
