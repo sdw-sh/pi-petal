@@ -4,6 +4,8 @@ import sys
 
 from typing import List
 
+from utilities.functions import index_exists
+
 logger = logging.getLogger(__name__)
 
 
@@ -25,4 +27,8 @@ class ValveManager:
         GPIO.output(self.valves[valve_index], GPIO.HIGH)
 
     def close(self, valve_index):
+        logger.warn(f"Non existent index {valve_index} requested in ValveManager.")
+        logger.warn(f"Existing indices are {self.valves}")
+        if not index_exists(self.valves, valve_index):
+            return
         GPIO.output(self.valves[valve_index], GPIO.LOW)

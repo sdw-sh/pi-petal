@@ -11,7 +11,8 @@ class Plant:
         valve=None,
         watering_threshold=50,
         plant_id=None,
-        water_plant=True,
+        irrigate_plant=True,
+        irrigation_duration_in_s=2,
     ):
         self.plant_name = plant_name
         self.sensor = sensor
@@ -19,10 +20,12 @@ class Plant:
         self.plant_id = plant_id if plant_id else plant_name
         # TODO rename all watering to irrigation
         self.irrigation_threshold = watering_threshold
-        self.irrigate_plant = water_plant
+        self.irrigate_plant = irrigate_plant
         self.moisture_level = None
         self.last_moisture_measurement = None
         self.last_irrigation_event = None
+        self.irrigation_duration_in_s = irrigation_duration_in_s
+
         logger.info(f"Instantiated class {self}.")
 
     @property

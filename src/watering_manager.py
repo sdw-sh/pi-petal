@@ -31,20 +31,20 @@ class WateringManager:
         self.valves = ValveManager({0: 35, 1: 37})
         # Todo add plant collection that checks for ids
         self.plants = [
-            Plant("Palm Tree", 0, watering_threshold=100, water_plant=False),
+            Plant("Palm Tree", 0, watering_threshold=100, irrigate_plant=False),
             Plant("Test Plant", 1, watering_threshold=100),
             Plant(
                 "Test Plant",
                 2,
                 plant_id="Test Plant 1",
-                water_plant=False,
+                irrigate_plant=False,
             ),
             Plant(
                 "Test Plant",
                 3,
                 valve=5,
                 plant_id="Test Plant 2",
-                water_plant=False,
+                irrigate_plant=False,
             ),
             Plant(
                 "Test Plant",

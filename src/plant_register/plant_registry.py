@@ -1,6 +1,6 @@
 import logging
 
-from typing import List
+from typing import List, Union
 
 from utilities.functions import find
 from plant_register.plant import Plant
@@ -10,20 +10,20 @@ logger = logging.getLogger(__name__)
 
 
 plants = [
-    Plant("Palme", 0, watering_threshold=60, water_plant=False),
+    Plant("Palme", 0, watering_threshold=60, irrigate_plant=False),
     Plant("Kaktus", 1, watering_threshold=30),
     Plant(
         "Gummibaum",
         2,
         plant_id="Test Plant 1",
-        water_plant=False,
+        irrigate_plant=False,
     ),
     Plant(
         "Wasserpflanze",
         3,
         valve=5,
         plant_id="Test Plant 2",
-        water_plant=False,
+        irrigate_plant=False,
     ),
     Plant(
         "Geldbaum",
@@ -34,7 +34,7 @@ plants = [
 ]
 
 
-class PlantRegister:
+class PlantRegistry:
     def __init__(self, plants=plants) -> None:
         self.plants: List[Plant] = plants
 
@@ -44,14 +44,13 @@ class PlantRegister:
             sensors.append(plant.sensor)
         return sensors
 
-    def update_moisture_values(
-        self,
-        measurement_results: List[MoistureMeasurementResult],
-    ):
-        for result in measurement_results:
-            self.update_moisture_value(result)
-
-    def update_moisture_value(self, result: MoistureMeasurementResult):
+    def update_moisture_value(
+        self, result: MoistureMeasurementResult
+    ) -> Union[None, Plant]:
+        """
+        returns the plant indicating that the plant has to be irrigated or False
+        if irrigate_plant is set to false it will always return false
+        """
         plant: Plant = find(
             self.plants,
             lambda plant: plant.sensor == result.sensor,
@@ -59,6 +58,9 @@ class PlantRegister:
         if plant is not None:
             plant.moisture_level = result.moisture_measurement
             plant.last_moisture_measurement = result.datetime
+            if not plant.irrigate_plant:
+                return None
+            return plant if plant.moisture_level < plant.irrigation_threshold else None
         else:
             logging.warn(
                 f"No plant found for sensor #{result.sensor} in PlantRegister."

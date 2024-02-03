@@ -24,20 +24,20 @@ logger = logging.getLogger(__name__)
 logging.info(">>>>>   Starting controls testing   <<<<<")
 
 plants = [
-    Plant("Palme", 0, watering_threshold=60, water_plant=False),
+    Plant("Palme", 0, watering_threshold=60, irrigate_plant=False),
     Plant("Kaktus", 1, watering_threshold=30),
     Plant(
         "Gummibaum",
         2,
         plant_id="Test Plant 1",
-        water_plant=False,
+        irrigate_plant=False,
     ),
     Plant(
         "Wasserpflanze",
         3,
         valve=5,
         plant_id="Test Plant 2",
-        water_plant=False,
+        irrigate_plant=False,
     ),
     Plant(
         "Geldbaum",
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     irrigationUnit = create_irrigation_unit()
 
     def eventCatcher(event):
-        irrigationUnit.water(event["valve"], event["seconds"])
+        irrigationUnit.irrigate(event["valve"], event["seconds"])
 
     dispatcher.connect(eventCatcher, "WaterPlant")
 
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     control_elements.append(
         ControlElement(
             name="",
-            button_1=lambda *_: irrigationUnit.water(1, 3),
+            button_1=lambda *_: irrigationUnit.irrigate(1, 3),
             # dispatcher.send(
             #    "WaterPlant",
             #    event={"valve": 1, "seconds": 3},

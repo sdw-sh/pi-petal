@@ -21,7 +21,7 @@ class MoistureMeasurementResultEvent:
         return f"<{self.__class__.__name__} for result: {self.result}>"
 
 
-class IrrigateEvent:
+class IrrigationEvent:
     def __init__(self, valve: int, time_in_s: float) -> None:
         self.valve = valve
         self.time_in_s = time_in_s
