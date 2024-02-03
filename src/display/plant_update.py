@@ -10,7 +10,7 @@ def plant_update(plant: Plant):
     return {
         "headline": plant.plant_name,
         "lines": [
-            f"Threshold: {plant.irrigation_threshold}",
+            f"Threshold: < {plant.irrigation_threshold} >",
             f"Measured: {plant.moisture_level}",
             f"Measurement Time:",
             f"{plant.last_moisture_measurement}",

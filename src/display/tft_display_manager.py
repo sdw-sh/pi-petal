@@ -32,9 +32,14 @@ class TftDisplayManager:
         )
         self.width = self.display.width
         self.height = self.display.height
-        # self.montserrat = ImageFont.truetype("../assets/fonts/Montserrat-Bold.ttf", 14)
-        self.emphasized_font = ImageFont.truetype("./assets/fonts/B612-Bold.ttf", 14)
-        self.regular_font = ImageFont.truetype("./assets/fonts/B612-Regular.ttf", 13)
+        # self.emphasized_font = ImageFont.truetype("./assets/fonts/B612-Bold.ttf", 14)
+        # self.regular_font = ImageFont.truetype("./assets/fonts/B612-Regular.ttf", 13)
+        self.emphasized_font = ImageFont.truetype(
+            "./assets/fonts/Montserrat-Bold.ttf", 14
+        )
+        self.regular_font = ImageFont.truetype(
+            "./assets/fonts/Montserrat-Regular.ttf", 13
+        )
         self.img = Image.new("RGB", (self.width, self.height))
         self.draw = ImageDraw.Draw(self.img)
 
@@ -54,17 +59,17 @@ class TftDisplayManager:
             fill=(0, 0, 0),
         )
         self.draw.text(
-            (2, -1),
+            (2, 0),
             headline,
             font=self.emphasized_font,
             fill=Color.MAIN_FONT_COLOR,
         )
-        line_x = 18
+        line_x = 19
         self.draw.line(
             (5, line_x, self.width - 5, line_x),
             fill=(0, 200, 0),
         )
-        height_offset = 20
+        height_offset = 21
         line_height = 15
         for index, line in enumerate(lines):
             self.draw.text(
