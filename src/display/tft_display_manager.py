@@ -15,6 +15,9 @@ class Color:
 
 
 class TftDisplayManager:
+
+    max_lines = 7
+
     def __init__(self) -> None:
         self.display = st7735.ST7735(
             port=0,
@@ -48,9 +51,9 @@ class TftDisplayManager:
         headline: str = "",
         lines: List[str] = [],
     ):
-        if len(lines) > 6:
+        if len(lines) > self.max_lines:
             logger.warning(
-                "The TFT display can display a maximum of a headline and 6 lines."
+                f"The TFT display can display a maximum of a headline and {self.max_lines} lines."
             )
         # clear the screen
         self.draw.rectangle(
