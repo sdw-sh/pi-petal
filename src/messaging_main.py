@@ -20,6 +20,7 @@ load_dotenv()
 log_setup(f"messaging.log")
 logger = logging.getLogger(__name__)
 
+# TODO (SDW) CONTINUE RIGHT HERE
 
 if __name__ == "__main__":
     initialize_board()
